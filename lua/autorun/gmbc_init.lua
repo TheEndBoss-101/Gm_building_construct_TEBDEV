@@ -3,16 +3,23 @@
     Revealing and exposing curses.
 ]]
 
-PG = {
-    id = "gm_building_construct",
-    luaFolder = "gm_building_construct",
-    dataFolder = "gm_building_construct",
-    maps = { "gm_construct", "gm_flatgrass", "gm_construct_13_beta" },
+GMBC = {
+    --devMode = false, -- The devMode enables access to SandEv's in-game commands and messages. They are used to control, visualize and create events
+    id = "gmbc", -- Stores instance id
+    luaFolder = "gmbc", -- Stores events and libs
+    dataFolder = "gm_building_construct", -- Stores memories and custom data
+    maps = { "gm_building_construct" },--"gm_construct", "gm_flatgrass", "gm_construct_13_beta" },
+    enableLogging = true,
+    enableLobby = false,
     enableEvents = true,
-    Ent = {}
+    Ent = {},
+    Log = {
+        enabled = true, -- Enable / disable log messages
+        debugAll = true -- Turn it on to see all the debug messages
+    }
 }
 
-PG.isValidMap = table.HasValue(PG.maps, game.GetMap())
+GMBC.isValidMap = table.HasValue(GMBC.maps, game.GetMap())
 
 -- Hotload Sandbox Events System (SandEv or SEv)
 hook.Add("OnGamemodeLoaded", "SEv_init", function()
@@ -33,6 +40,7 @@ hook.Add("OnGamemodeLoaded", "SEv_init", function()
     end)
 end)
 
-hook.Add("sandev_init", PG.luaFolder, function(SEv)
-    SEv:AddInstance(PG)
+hook.Add("sandev_init", GMBC.luaFolder, function(SEv)
+    SEv:AddInstance(GMBC)
+    print("Loading GMBC.")
 end)

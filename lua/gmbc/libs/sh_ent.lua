@@ -1,6 +1,8 @@
 -- Test func
-function PG.Ent:ExplodeNPC(npc)
+function GMBC.Ent:ExplodeNPC(npc)
     if not IsValid(npc) or not npc:IsNPC() then return end
+
+    GMBC.Log:Debug(false, "Valid NPC, Explodeing.")
 
     npc:Ignite(4, 200)
 
